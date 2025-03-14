@@ -14,6 +14,8 @@
                     <p class="text-gray-600">{{ $course->description }}</p>
                     <p class="text-blue-500 font-bold">Rp {{ number_format($course->price, 0, ',', '.') }}</p>
                     <p class="text-sm text-gray-500">Instruktur: {{ $course->instructor->name }}</p>
+                    <x-secondary-button><a href="/courses/{{ $course->id }}/edit">Edit</a></x-secondary-button>
+                    <x-danger-button wire:click="delete({{ $course->id }})">Hapus</x-danger-button>
                 </div>
             @endforeach
         </div>
