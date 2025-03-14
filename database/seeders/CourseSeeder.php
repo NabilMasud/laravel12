@@ -41,5 +41,20 @@ class CourseSeeder extends Seeder
             'price' => 175000,
             'user_id' => $instructor->id,
         ]);
+        Course::create([
+            'title' => 'Belajar Laravel 12',
+            'description' => 'Kursus ini membahas dasar hingga lanjutan Laravel 12.',
+            'price' => 150000,
+            'thumbnail' => 'https://laravel.com/assets/img/welcome/background.svg',
+            'user_id' => $instructor->id,
+        ]);
+
+        Course::create([
+            'title' => 'Fundamental Livewire',
+            'description' => 'Kursus ini membahas penggunaan Livewire dalam Laravel.',
+            'price' => 120000,
+            'thumbnail' => 'https://laravel.com/assets/img/welcome/background.svg',
+            'user_id' => $instructor->id,
+        ]);
     }
 }
