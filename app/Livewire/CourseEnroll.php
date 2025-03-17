@@ -24,6 +24,12 @@ class CourseEnroll extends Component
 
         $user = Auth::user();
 
+        // Cek apakah user adalah siswa
+        if (!$user->isStudent()) {
+            session()->flash('message', 'Hanya siswa yang bisa mendaftar ke kursus.');
+            return;
+        }
+
         // Cek apakah user sudah terdaftar di kursus ini
         if (Enrollment::where('user_id', $user->id)->where('course_id', $this->course->id)->exists()) {
             session()->flash('message', 'Anda sudah terdaftar di kursus ini.');

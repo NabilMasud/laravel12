@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Course::class);
     }
+
+    public function isStudent()
+    {
+        return $this->role === 'student';
+    }
+
+    public function isInstructor()
+    {
+        return $this->role === 'instructor';
+    }
 }
