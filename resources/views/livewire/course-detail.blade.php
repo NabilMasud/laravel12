@@ -11,6 +11,14 @@
     <ul class="mt-2">
         @forelse ($course->lessons as $lesson)
             <li class="p-2 border-b">{{ $lesson->title }}</li>
+            <ul>
+                <li class="pl-4">{{ $lesson->content }}"</li>
+                @if ($lesson->file)
+                    <li class="pl-4">
+                        <a href="{{ Storage::url($lesson->file) }}" target="_blank">Download Materi</a>
+                    </li>
+                @endif
+            </ul>
         @empty
             <li class="text-gray-500">Belum ada materi.</li>
         @endforelse

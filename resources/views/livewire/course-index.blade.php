@@ -9,7 +9,11 @@
         <div class="grid grid-cols-3 gap-4">
             @foreach($courses as $course)
                 <div class="p-4 border rounded shadow">
-                    <img src="{{ $course->thumbnail }}" alt="{{ $course->title }}" class="w-full h-40 object-cover mb-2">
+                    @if ($course->thumbnail != '')
+                        <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}" class="w-full h-40 object-cover mb-2">
+                        @else
+                        <svg xmlns="http://www.w3.org/2000/svg" style="background-color:#cccccc;" class="w-full h-40 object-cover mb-2"></svg>
+                    @endif
                     <h3 class="text-lg font-semibold">{{ $course->title }}</h3>
                     <p class="text-gray-600">{{ $course->description }}</p>
                     <p class="text-blue-500 font-bold">Rp {{ number_format($course->price, 0, ',', '.') }}</p>

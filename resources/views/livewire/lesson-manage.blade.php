@@ -1,4 +1,4 @@
-<x-app-layout>
+{{-- <x-app-layout> --}}
 <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow">
     <h2 class="text-xl font-bold mb-4">Manajemen Materi</h2>
 
@@ -12,13 +12,19 @@
         <div class="mb-4">
             <label class="block text-sm font-medium">Judul Materi</label>
             <input type="text" wire:model="title" class="w-full p-2 border rounded">
-            @error('title') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            <x-input-error :messages="$errors->get('title')" />
         </div>
 
         <div class="mb-4">
             <label class="block text-sm font-medium">Isi Materi</label>
             <textarea wire:model="content" class="w-full p-2 border rounded"></textarea>
-            @error('content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            <x-input-error :messages="$errors->get('content')" />
+        </div>
+
+        <div>
+            <label for="file" class="block text-sm font-medium">Upload File (PDF, DOC, Video)</label>
+            <input type="file" wire:model="file" id="file" class="w-full p-2 border rounded">
+            <x-input-error :messages="$errors->get('file')" />
         </div>
 
         <x-primary-button>{{ __('Tambah Materi') }}</x-primary-button>
@@ -34,4 +40,4 @@
         @endforeach
     </ul>
 </div>
-</x-aoo-layout>
+{{-- </x-app-layout> --}}
