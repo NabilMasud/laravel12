@@ -16,8 +16,46 @@
         @endforelse
     </ul>
 
+    @if (auth()->check() && auth()->user()->isInstructor())
+        <!-- Menampilkan jumlah siswa -->
+        <p class="mt-2 text-gray-700">
+            Ada <strong>{{ $studentCount }}</strong> siswa terdaftar.
+        </p>
+    @endif
+
     {{-- <a href="/courses/{{ $course->id }}/enroll" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded inline-block">
         Daftar Kursus
     </a> --}}
-    <x-secondary-button><a href="/courses/{{ $course->id }}/enroll">{{__('Daftar Kursus')}}</a></x-secondary-button>
+    @if(auth()->check() && auth()->user()->isStudent())
+        <x-secondary-button><a href="/courses/{{ $course->id }}/enroll">{{__('Daftar Kursus')}}</a></x-secondary-button>
+    @endif
+    
+    <!-- Tombol Load Data Siswa -->
+    {{-- <button wire:click="loadStudents" class="bg-blue-500 text-white px-4 py-2 mt-4 rounded">
+        Load Data Siswa
+    </button> --}}
+
+    @if (auth()->check() && auth()->user()->isInstructor())
+        <x-secondary-button wire:click="loadStudents">{{__('Load Data Siswa')}}</x-secondary-button>
+    @endif
+
+    <!-- Loading Spinner -->
+    <div wire:loading class="mt-4">
+        <p class="text-blue-500">Loading data siswa...</p>
+    </div>
+
+    <!-- Menampilkan daftar siswa jika sudah ditekan -->
+    @if($showStudents)
+        <h3 class="text-xl font-bold mt-4">Daftar Siswa</h3>
+
+        @if(empty($students))
+            <p class="text-gray-500">Tidak ada siswa yang terdaftar di kursus ini.</p>
+        @else
+            <ul class="mt-2">
+                @foreach ($students as $student)
+                    <li class="border p-2">{{ $student->name }} ({{ $student->email }})</li>
+                @endforeach
+            </ul>
+        @endif
+    @endif
 </div>
